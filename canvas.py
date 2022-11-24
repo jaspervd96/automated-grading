@@ -44,13 +44,13 @@ class CanvasConnect:
             try:
                 for attachment in submission.attachments:
                     student = self.students.loc[submission.user_id]
-                    response = self.assignment._requester.request("GET", _url=attachment["url"])
-                    filename = attachment["display_name"]
+                    response = self.assignment._requester.request("GET", _url=attachment.url)
+                    filename = attachment.display_name
                     filepref = "%s%s%s_%s_%s" % (student.lastname.lower().replace(' ', ''),
                                                  student.initials.replace('.', '').lower(),
                                                  student.middlename.replace(' ', '').lower(),
                                                  submission.user_id,
-                                                 attachment["id"])
+                                                 attachment.id)
                     path = os.path.join(path_to, filepref)
                     if not filename.lower().endswith(".zip"):
                         _save_file(response.content, f"{path}_{filename}")
