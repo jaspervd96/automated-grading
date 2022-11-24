@@ -63,8 +63,8 @@ class CanvasConnect:
                                     _save_file(zipfile.read(file), f"{path}_{filename}")
                         else:
                             zipfile.extractall(path)
-            except:
-                status[submission.user_id] = "+".join((status.get(submission.user_id, ""), "FAILED_DOWNLOAD"))
+            except Exception as e:
+                status[submission.user_id] = "+".join((status.get(submission.user_id, ""), "FAILED_DOWNLOAD", str(e)))
         return status
         
     def post_grades(self, grades, key="canvas_id"):
