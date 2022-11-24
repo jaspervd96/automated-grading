@@ -11,8 +11,8 @@ from tqdm.auto import tqdm
 class CanvasConnect:
     def __init__(self, COURSE, YEAR, ASSIGNMENT, API_KEY = "canvas_api_key.txt", CANVAS = "https://canvas.vu.nl/"):
         with open(API_KEY) as file: self.canvas = Canvas(CANVAS, file.read())
-        self.course = next(course for course in self.canvas.get_courses() if getattr(course, "course_code") == COURSE and getattr(course, start_at_date, dt.datetime.min).year == int(YEAR))
-        self.assignment = next(assignment for assignment in self.course.get_assignments() if getattr(assignment, "name") == ASSIGNMENT)
+        self.course = next(course for course in self.canvas.get_courses() if getattr(course, "course_code", None) == COURSE and getattr(course, start_at_date, dt.datetime.min).year == int(YEAR))
+        self.assignment = next(assignment for assignment in self.course.get_assignments() if getattr(assignment, "name", None) == ASSIGNMENT)
 
         def _iter_students():
           for student in self.course.get_enrollments():
